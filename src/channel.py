@@ -23,6 +23,38 @@ class Channel:
         self.video_count = channel['items'][0]['statistics']['videoCount']
         self.view_count = channel['items'][0]['statistics']['viewCount']
 
+    def __repr__(self):
+        """ Возвращает название канала и url ссылку"""
+        return f'{self.title} ({self.url})'
+
+    def __add__(self, other):
+        """ Возвращает сумму подписчиков двух каналов """
+        return int(self.subscriber_count) + int(other.subscriber_count)
+
+    def __sub__(self, other):
+        """ Возвращает разность подписчиков двух каналов """
+        return int(self.subscriber_count) - int(other.subscriber_count)
+
+    def __gt__(self, other):
+        """ Возвращает True если количество подписчиков первого канала больше, чем у второго """
+        return int(self.subscriber_count) > int(other.subscriber_count)
+
+    def __ge__(self, other):
+        """ Возвращает True если количество подписчиков первого канала больше или равно, чем у второго """
+        return int(self.subscriber_count) >= int(other.subscriber_count)
+
+    def __lt__(self, other):
+        """ Возвращает True если количество подписчиков первого канала меньше, чем у второго """
+        return int(self.subscriber_count) < int(other.subscriber_count)
+
+    def __le__(self, other):
+        """ Возвращает True если количество подписчиков первого канала меньше или равно, чем у второго """
+        return int(self.subscriber_count) <= int(other.subscriber_count)
+
+    def __eq__(self, other):
+        """ Возвращает True если количество подписчиков первого канала равно количеству подписчиков второго канала """
+        return int(self.subscriber_count) == int(other.subscriber_count)
+
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
         api_key = os.getenv('YT_API_KEY')
