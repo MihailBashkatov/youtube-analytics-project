@@ -10,7 +10,6 @@ class Video:
         """Экземпляр инициализируется по id видео. Дальше все данные будут подтягиваться по API."""
         self.__video_id: str = video_id
 
-
         api_key = os.getenv('YT_API_KEY')
         youtube = build('youtube', 'v3', developerKey=api_key)
 
@@ -32,6 +31,7 @@ class Video:
     def video_id(self):
         return self.__video_id
 
+
 class PLVideo(Video):
     """Класс для видеороликов в определенном плэйлисте"""
     def __init__(self, video_id, playlist_id):
@@ -46,10 +46,11 @@ class PLVideo(Video):
                                                        maxResults=50,
                                                        ).execute()
 
-        #получить все id видеороликов из плейлиста
+        # получить все id видеороликов из плейлиста
         video_ids: list[str] = [video['contentDetails']['videoId'] for video in playlist_videos['items']]
 
-        # Если ID видеоролика есть в списке видероликов плэйлиста, то экземпляр инициализируется. Иначе выводится сообщение, что такого ролика нет
+        # Если ID видеоролика есть в списке видероликов плэйлиста, то экземпляр инициализируется.
+        # Иначе выводится сообщение, что такого ролика нет
         flag = False
         for video in video_ids:
             if self.__video_id == video:
