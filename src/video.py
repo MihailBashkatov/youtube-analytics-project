@@ -51,11 +51,7 @@ class PLVideo(Video):
 
         # Если ID видеоролика есть в списке видероликов плэйлиста, то экземпляр инициализируется.
         # Иначе выводится сообщение, что такого ролика нет
-        flag = False
-        for video in video_ids:
-            if self.__video_id == video:
-                super().__init__(self.__video_id)
-                flag = True
-        if not flag:
+        if self.__video_id not in video_ids:
             print('No such video')
             quit()
+        super().__init__(self.__video_id)
